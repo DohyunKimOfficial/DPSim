@@ -14,6 +14,9 @@
 // Config: maximum length of process name
 #define PROCESS_NAME_MAX    128
 
+// block to kb macro
+#define block_to_kb(d) d/2.0
+
 // Namespace for block parser
 namespace dpsim {
 

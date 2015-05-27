@@ -161,15 +161,15 @@ namespace dpsim {
       std::cout << "# Action filter disabled" << std::endl;
     } else {
       std::cout << "# Action filter("
-                << this.opt.filter.action_num << "):"
+                << this->opt.filter.action_num << "):"
                 << this->opt.filter.action << std::endl;
     }
 
     if (this->opt.filter.rwbs_num == 0) {
       std::cout << "# Rwbs filter disabled" << std::endl;
     } else {
-      std::cout << "# Rwbs filter( "
-                << this.opt.filter.rwbs_num << "):"
+      std::cout << "# Rwbs filter("
+                << this->opt.filter.rwbs_num << "):"
                 << this->opt.filter.rwbs << std::endl;
     }
 
@@ -203,10 +203,10 @@ namespace dpsim {
 
     // %8s field
     token = strtok_r(NULL, " ", &saveptr);
-    parsed_trace->timestamp = atof(token);
 
-    // sequence number field
+    // %5T.%9t field
     token = strtok_r(NULL, " ", &saveptr);
+    parsed_trace->timestamp = atof(token);
 
     // %5p field
     token = strtok_r(NULL, " ", &saveptr);

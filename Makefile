@@ -2,16 +2,33 @@ CC=g++
 CCFLAGS=-std=c++0x -g -O0
 
 PARSER_DIR=parser
+PREDICTOR_DIR=predictor
 
-DEPS=$(PARSER_DIR)/blk_parser.h
-PARSER=$(PARSER_DIR)/blk_parser.cpp
-PARSER_OBJ=$(PARSER_DIR)/blk_parser.o
+PARSER_DEPS=$(PARSER_DIR)/blk_parser.h
+PREDICTOR_DEPS=$(PREDICTOR_DIR)/predictor.h \
+							 $(PREDICTOR_DIR)/oracle_predictor.h
 
-$(PARSER_OBJ):
-	$(CC) $(CCFLAGS) -c -o $@ $(PARSER)
+DEPS=$(PARSER_DEPS) \
+		 $(PREDCITRO_DEPS)
+
+PARSER_OBJ=$(patsubst %.h, %.o, $(PARSER_DEPS))
+PREDICTOR_OBJ=$(patsubst %.h, %.o, $(PREDICTOR_DEPS))
+
+DPPARSER=DPParser
+DPPARSER_SRC=$(DPPARSER).cpp
+DPSIM=DPSim
+DPSIM_SRC=$(DPSIM).cpp
+
+all: parser simulator
+
+%.o: %.cpp
+	$(CC) $(CCFLAGS) -c -o $@ $<
 
 parser: $(PARSER_OBJ)
-	$(CC) $(CCFLAGS) -o DPParser DPParser.cpp $(PARSER_OBJ)
+	$(CC) $(CCFLAGS) -o $(DPPARSER) $(DPPARSER_SRC) $(PARSER_OBJ)
+
+simulator: $(PARSER_OBJ) $(PREDICTOR_OBJ)
+	$(CC) $(CCFLAGS) -o $(DPSIM) $(DPSIM_SRC) $(PARSER_OBJ) $(PREDICTOR_OBJ)
 
 clean:
-	rm -f $(PARSER_DIR)/*.o
+	rm -f $(PARSER_OBJ) $(PREDICTOR_OBJ) $(DPPARSER) $(DPSIM)
