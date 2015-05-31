@@ -50,7 +50,7 @@ namespace dpsim {
         struct prediction pred;
         pred.start_time = this->last_prediction_time;
         pred.duration = Predictor::prediction_interval;
-        pred.data_size = block_to_kb(this->interval_sum);
+        pred.data_size = this->interval_sum;
 
         // push prediction to queue
         Predictor::predictions.push_back(pred);
@@ -60,9 +60,7 @@ namespace dpsim {
         this->interval_sum = 0.0;
       }
 
-      this->interval_sum += parsed_trace->block_size;
+      this->interval_sum += block_to_kb(parsed_trace->block_size);
     }
-
-    return 0;
   }
 }  // namespace dpsim

@@ -6,7 +6,9 @@ PREDICTOR_DIR=predictor
 
 PARSER_DEPS=$(PARSER_DIR)/blk_parser.h
 PREDICTOR_DEPS=$(PREDICTOR_DIR)/predictor.h \
-							 $(PREDICTOR_DIR)/oracle_predictor.h
+							 $(PREDICTOR_DIR)/oracle_predictor.h \
+							 $(PREDICTOR_DIR)/cdh_predictor.h \
+							 $(PREDICTOR_DIR)/history_predictor.h
 
 DEPS=$(PARSER_DEPS) \
 		 $(PREDCITRO_DEPS)

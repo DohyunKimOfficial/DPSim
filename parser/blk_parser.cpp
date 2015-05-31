@@ -179,6 +179,7 @@ namespace dpsim {
       std::cout << "# Process name filter: "
                 << this->opt.filter.process_name << std::endl;
     }
+    std::cout << "#############################" << std::endl;
   }
 
   void
