@@ -64,7 +64,7 @@ CDHPredictor::consume(struct trace* parsed_trace) {
       pred.start_time = expiration_time
                         + i * this->t_expire / this->n_wb;
       pred.duration = Predictor::prediction_interval;
-      pred.data_size = static_cast<double>(this->predict())/this->n_wb;
+      pred.data_size = static_cast<double>(predicted_data_size)/this->n_wb;
 
       Predictor::predictions.push_back(pred);
     }
@@ -95,6 +95,6 @@ uint32_t CDHPredictor::predict() {
     }
   }
 
-  return prediction * histogram_bin_width;
+  return (prediction + 1) * histogram_bin_width;
 }
 }  // namespace dpsim

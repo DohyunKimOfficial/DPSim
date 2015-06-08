@@ -33,7 +33,7 @@ HistoryPredictor::consume(struct trace* parsed_trace) {
     double interval_num = (this->history.empty()) ? 1.0 : this->history.size();
 
     struct prediction pred;
-    pred.start_time = this->last_prediction_time;
+    pred.start_time = this->last_prediction_time + Predictor::prediction_interval;
     pred.duration = Predictor::prediction_interval;
     pred.data_size = window_sum/interval_num;
 
