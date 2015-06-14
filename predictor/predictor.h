@@ -2,6 +2,7 @@
 #define PREDICTOR_PREDICTOR_H_
 
 #include <deque>
+#include <string>
 #include "../parser/blk_parser.h"
 
 namespace dpsim {
