@@ -10,7 +10,8 @@ PREDICTOR_DEPS=$(PREDICTOR_DIR)/predictor.h \
 							 $(PREDICTOR_DIR)/cdh_predictor.h \
 							 $(PREDICTOR_DIR)/history_predictor.h \
 							 $(PREDICTOR_DIR)/fb_history_predictor.h \
-							 $(PREDICTOR_DIR)/periodic_predictor.h
+							 $(PREDICTOR_DIR)/periodic_predictor.h \
+							 $(PREDICTOR_DIR)/neural_predictor.h
 
 DEPS=$(PARSER_DEPS) \
 		 $(PREDCITRO_DEPS)

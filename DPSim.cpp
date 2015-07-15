@@ -9,6 +9,7 @@
 #include "./predictor/history_predictor.h"
 #include "./predictor/fb_history_predictor.h"
 #include "./predictor/periodic_predictor.h"
+#include "./predictor/neural_predictor.h"
 
 #define PREDICTION_INTERVAL 5
 #define CDH_T_EXPIRE 30
@@ -16,7 +17,7 @@
 #define MB 1024
 #define GB 1024*1024
 
-#define NUM_PREDICTOR 5
+#define NUM_PREDICTOR 1
 
 int main(int argc, char** argv) {
   dpsim::BlkParser *parser = new dpsim::BlkParser(argc, argv);
@@ -27,8 +28,10 @@ int main(int argc, char** argv) {
   oracle_predictor =
     new dpsim::OraclePredictor(PREDICTION_INTERVAL);
   predictors[0] =
-    new dpsim::HistoryPredictor(5, 6, dpsim::mode_avg);
-  predictors[1] =
+    new dpsim::NeuralPredictor(5, 5, 5, 6, dpsim::mode_arma);
+//  predictors[0] =
+//    new dpsim::HistoryPredictor(5, 6, dpsim::mode_avg);
+/*  predictors[1] =
     new dpsim::CDHPredictor(0.8, CDH_T_EXPIRE, CDH_N_WB, 10*MB, 6);
   predictors[2] =
     new dpsim::CDHPredictor(0.8, PREDICTION_INTERVAL, 1, 1*MB, 30);
@@ -37,7 +40,8 @@ int main(int argc, char** argv) {
   predictors[4] =
     new dpsim::PeriodicPredictor(PREDICTION_INTERVAL, 1, 30,
                                  dpsim::mode_singleperiod);
-  predictors[5] = oracle_predictor;
+*/
+  predictors[1] = oracle_predictor;
 
   int processed = 0;
   int filtered_processed = 0;
