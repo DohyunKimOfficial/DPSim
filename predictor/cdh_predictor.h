@@ -7,9 +7,15 @@
 #include "../parser/blk_parser.h"
 
 namespace dpsim {
+//----------------------------------------------------------------------------
+/// @brief CDH predictor
+///
+/// CDH(Cumulative density histogram) predictor
+/// utilizes CDH for its predictions.
+///
 class CDHPredictor: public Predictor {
  private:
-  float probability;
+  float probability;            ///< probability for
   int32_t last_prediction_time;
   double interval_sum;
   int32_t n_wb;

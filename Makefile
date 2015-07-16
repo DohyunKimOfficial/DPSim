@@ -29,6 +29,9 @@ all: parser simulator
 %.o: %.cpp
 	$(CC) $(CCFLAGS) -c -o $@ $<
 
+doc:
+	doxygen Doxyfile
+
 parser: $(PARSER_OBJ)
 	$(CC) $(CCFLAGS) -o $(DPPARSER) $(DPPARSER_SRC) $(PARSER_OBJ)
 

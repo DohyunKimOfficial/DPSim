@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
   oracle_predictor =
     new dpsim::OraclePredictor(PREDICTION_INTERVAL);
   predictors[0] =
-    new dpsim::NeuralPredictor(5, 5, 5, 6, dpsim::mode_arma);
+    new dpsim::NeuralPredictor(4, 5, 5, 6, dpsim::mode_arma);
 //  predictors[0] =
 //    new dpsim::HistoryPredictor(5, 6, dpsim::mode_avg);
 /*  predictors[1] =

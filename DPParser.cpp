@@ -5,15 +5,17 @@
 #include "parser/blk_parser.h"
 
 int main(int argc, char** argv) {
+  // initialize parser with given argc, argv
   dpsim::BlkParser *parser = new dpsim::BlkParser(argc, argv);
 
-  int processed = 0;
-  int filtered_processed = 0;
-  std::string line;
+  // variables
+  int processed = 0;  // number of processed trace lines
+  int filtered_processed = 0;  // number of filtered trace lines
+  std::string line;  // temporary string for line input
 
-  std::ifstream fin;
-  std::ofstream fout;
-  struct dpsim::trace parsed_trace;
+  std::ifstream fin;  // file input stream
+  std::ofstream fout;  // file output stream
+  struct dpsim::trace parsed_trace;  // temporary parsed trace input
 
   fin.open(parser->get_input_file_name());
   fout.open(parser->get_output_file_name());

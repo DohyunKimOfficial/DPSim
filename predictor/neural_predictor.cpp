@@ -29,9 +29,11 @@ void
 NeuralPredictor::build_simple_network() {
   for (int32_t i = 0; i < this->hidden_number; i++) {
     for (int32_t j = 0; j < this->sample_size; j++) {
-      ih_weights.push_back(1.0/(this->hidden_number * this->sample_size));
+      ih_weights.push_back(0.0);
+//    ih_weights.push_back(1.0/(this->hidden_number * this->sample_size));
     }
-    ho_weights.push_back(1.0/this->hidden_number);
+//  ho_weights.push_back(1.0/this->hidden_number);
+    ho_weights.push_back(0.0);
   }
 }
 
@@ -55,6 +57,7 @@ NeuralPredictor::forward_pass() {
     for (int32_t j = 0; j < this->sample_size; j++) {
       double input = this->samples[j];
       double weight = this->ih_weights[j*this->hidden_number + i];
+      assert(j*this->hidden_number + i < this->ih_weights.size());
       value += input * weight;
     }
     hiddens.push_back(1.0 / (1 + exp(-value)));
@@ -99,7 +102,7 @@ NeuralPredictor::train(double expected_output) {
   }
   output = 1.0 / (1 + exp(-output));
 
-  double output_error = (normalize_value(expected_output) - output) * \
+  double output_error = (expected_output - output) * \
                         output * (1 - output);
 
   for (int32_t i = 0; i < this->hidden_number; i++) {
@@ -109,11 +112,12 @@ NeuralPredictor::train(double expected_output) {
 
     for (int32_t j = 0; j < this->sample_size; j++) {
       int32_t index = j*this->hidden_number + i;
+      assert(index < this->ih_weights.size());
       this->ih_weights[index] += hidden_error * this->samples[j];
     }
   }
   std::cout << "output: " << output
-            << " expected output: " << normalize_value(expected_output)
+            << " expected output: " << expected_output
             << " error: " << output_error << std::endl;
 }
 
