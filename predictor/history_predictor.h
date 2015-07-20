@@ -34,9 +34,12 @@ class HistoryPredictor: public Predictor {
                             int32_t mode);
 
   /// @brief consumes one more parsed trace line
-  /// @retval zeo if no error occurred, otherwise if not
+  /// @retval zero if no error occurred, otherwise if not
   /// @param parsed_trace trace struct for passing parsed details
   int consume(struct trace* parsed_trace);
+
+  /// @brief makes a prediction
+  /// @retval predicted amount of write data in Kb
   double predict();
 };
 }  // namespace dpsim
